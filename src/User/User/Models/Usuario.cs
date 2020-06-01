@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
-namespace User.API.Model
+namespace User.Models
 {
-    public class User
+    public class Usuario
     {
         [Key]
         public BigInteger UserId { get; set; }
@@ -31,7 +31,7 @@ namespace User.API.Model
         [MinLength(1, ErrorMessage = "Este campo deve conter entre 1 e 20 caracteres")]
         public string UserPassword { get; set; }
 
-        [Required(ErrorMessage ="Este campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public DateTime UserBirthDate { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
