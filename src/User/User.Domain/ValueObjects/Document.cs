@@ -1,14 +1,17 @@
-﻿namespace User.Domain.ValueObjects
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+
+namespace Domain.ValueObjects
 {
-    public class Document
+    public class Document : Notifiable
     {
         public Document(string number)
         {
             Number = number;
 
-            //AddNotifications(new ValidationContract()
-            //    .IsTrue(Validate(Number), "Document", "CPF inválido")
-            //);
+            AddNotifications(new Contract()
+                .IsTrue(Validate(Number), "Document", "CPF inválido")
+            );
         }
 
         public string Number { get; private set; }

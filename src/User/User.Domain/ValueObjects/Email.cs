@@ -1,14 +1,22 @@
-﻿namespace User.Domain.ValueObjects
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+
+namespace Domain.ValueObjects
 {
-    public class Email
+    public class Email : Notifiable
     {
         public Email(string email)
         {
-            UserEmail = email;
+            UserMainEmail = email;
+
+            AddNotifications(new Contract()
+             .Requires()
+             .IsEmail(UserMainEmail, "Email", "O E-mail é inválido")
+         );
         }
 
-        public string UserEmail { get; private set; }
+        public string UserMainEmail { get; private set; }
 
-        public override string ToString() => UserEmail.ToString();
+        public override string ToString() => UserMainEmail.ToString();
     }
 }

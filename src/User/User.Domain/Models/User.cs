@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Domain.ValueObjects;
+using Flunt.Notifications;
+using Flunt.Validations;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
-using User.Domain.ValueObjects;
 
-namespace User.Domain.Models
+namespace Domain.Models
 {
-    public class User
+    public class User : Notifiable
     {
         public User(string userName, char userGender, Email userMainEmail, string userPassword, DateTime userBirthDate, Document userCpf, DateTime userFirstLoginDate, int customerId, int departmentId, int cargoId, int profileId, int userStatusId, string role)
         {
@@ -22,6 +24,13 @@ namespace User.Domain.Models
             ProfileId = profileId;
             UserStatusId = userStatusId;
             Role = role;
+
+            AddNotifications(new Contract()
+                 .Requires()
+                 .HasMinLen(UserName, 3, "UserName", "O nome deve conter pelo menos 3 caracteres")
+                 .HasMaxLen(UserName, 100, "UserName", "O nome deve conter no máximo 40 caracteres")
+             );
+
         }
 
         [Key]

@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using User.Domain.Enums;
 
-namespace User.Domain.Models
+namespace Domain.Models
 {
     public class UserAddress
     {
@@ -12,8 +12,8 @@ namespace User.Domain.Models
             UserStreetName = userStreetName;
             UserComplement = userComplement;
             UserNeighborhood = userNeighborhood;
-            UserCity = userCity;
-            UserState = userState;
+            UserStreetCity = userCity;
+            UserStreetState = userState;
             UserCountry = userCountry;
             UserZipCode = userZipCode;
             AddressTypeId = addressTypeId;
