@@ -2,7 +2,7 @@ namespace UserDomain.Entities
 {
     public class UserAddress
     {
-        public UserAddress(long userAddressId, int userStreetNumber, string userStreetName, string userComplement, string userNeighborhood, string userCity, string userState, string userCountry, int userZipCode, long userId, User user, long addressTypeId, AddressType addressType)
+        public UserAddress(long userAddressId, int userStreetNumber, string userStreetName, string userComplement, string userNeighborhood, string userCity, string userState, string userCountry, int userZipCode, long userId, long addressTypeId)
         {
             UserAddressId = userAddressId;
             UserStreetNumber = userStreetNumber;
@@ -14,9 +14,7 @@ namespace UserDomain.Entities
             UserCountry = userCountry;
             UserZipCode = userZipCode;
             UserId = userId;
-            User = user;
             AddressTypeId = addressTypeId;
-            AddressType = addressType;
         }
 
         public long UserAddressId { get; private set; }

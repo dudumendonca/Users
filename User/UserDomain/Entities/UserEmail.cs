@@ -2,14 +2,12 @@ namespace UserDomain.Entities
 {
     public class UserEmail
     {
-        public UserEmail(int userEmailId, string userMail, int userId, User user, int emailTypeId, EmailType emailType)
+        public UserEmail(int userEmailId, string userMail, int userId,  int emailTypeId)
         {
             UserEmailId = userEmailId;
             UserMail = userMail;
             UserId = userId;
-            User = user;
             EmailTypeId = emailTypeId;
-            EmailType = emailType;
         }
 
         public int UserEmailId { get; private set; }

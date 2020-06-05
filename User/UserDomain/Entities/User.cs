@@ -5,7 +5,7 @@ namespace UserDomain.Entities
 {
     public class User
     {
-        public User(long userId, string userName, string userGender, string userMainEmail, string userPassword, DateTime userBirthDate, string userCpf, DateTime userFirstLoginDate, DateTime userDeletedDate, long userDeletedUser, int customerId, int departmentId, int cargoId, int profileId, int userStatusId, UserStatus userStatus, string role, IEnumerable<UserAddress> addresses)
+        public User(long userId, string userName, string userGender, string userMainEmail, string userPassword, DateTime userBirthDate, string userCpf, DateTime? userFirstLoginDate, DateTime? userDeletedDate, long? userDeletedUser, int customerId, int departmentId, int cargoId, int profileId, int userStatusId, string role)
         {
             UserId = userId;
             UserName = userName;
@@ -22,9 +22,7 @@ namespace UserDomain.Entities
             CargoId = cargoId;
             ProfileId = profileId;
             UserStatusId = userStatusId;
-            UserStatus = userStatus;
             Role = role;
-            Addresses = addresses;
         }
 
         public long UserId { get; private set; }
@@ -34,9 +32,9 @@ namespace UserDomain.Entities
         public string UserPassword { get; private set; }
         public DateTime UserBirthDate { get; private set; }
         public string UserCpf { get; private set; }
-        public DateTime UserFirstLoginDate { get; private set; }
-        public DateTime UserDeletedDate { get; private set; }
-        public long UserDeletedUser { get; private set; }
+        public DateTime? UserFirstLoginDate { get; private set; }
+        public DateTime? UserDeletedDate { get; private set; }
+        public long? UserDeletedUser { get; private set; }
         public int CustomerId { get; private set; }
         public int DepartmentId { get; private set; }
         public int CargoId { get; private set; }

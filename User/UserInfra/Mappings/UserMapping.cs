@@ -14,13 +14,13 @@ namespace UserInfra.Mappings
             builder.Property(x => x.UserMainEmail).HasColumnType("varchar(254)").IsRequired().IsUnicode(true);
             builder.Property(x => x.UserPassword).HasColumnType("varchar(20)");
             builder.Property(x => x.UserBirthDate).HasColumnType("Date").IsRequired();
-            builder.Property(x => x.UserCpf).HasColumnType("int(11)").IsRequired();
+            builder.Property(x => x.UserCpf).HasColumnType("varchar(20)").IsRequired();
             builder.Property(x => x.UserFirstLoginDate).HasColumnType("Date");
             builder.Property(x => x.UserDeletedDate).HasColumnType("Date");
-            builder.Property(x => x.CustomerId).HasColumnType("long");
-            builder.Property(x => x.DepartmentId).HasColumnType("long");
-            builder.Property(x => x.CargoId).HasColumnType("long");
-            builder.Property(x => x.ProfileId).HasColumnType("long");
+            builder.Property(x => x.CustomerId).HasColumnType("int");
+            builder.Property(x => x.DepartmentId).HasColumnType("int");
+            builder.Property(x => x.CargoId).HasColumnType("int");
+            builder.Property(x => x.ProfileId).HasColumnType("int");
             builder.HasOne(f => f.UserStatus).WithOne(e => e.User);
             builder.Property(x => x.Role).HasColumnType("varchar(50)");
         }

@@ -2,16 +2,14 @@ namespace UserDomain.Entities
 {
     public class UserContact
     {
-        public UserContact(long userContactId, int userCountryRegion, int userDDD, int userPhoneNumber, int contactTypeId, ContactType contactType, long userId, User user)
+        public UserContact(long userContactId, int userCountryRegion, int userDDD, int userPhoneNumber, int contactTypeId, long userId)
         {
             UserContactId = userContactId;
             UserCountryRegion = userCountryRegion;
             UserDDD = userDDD;
             UserPhoneNumber = userPhoneNumber;
             ContactTypeId = contactTypeId;
-            ContactType = contactType;
             UserId = userId;
-            User = user;
         }
 
         public long UserContactId { get; private set; }
