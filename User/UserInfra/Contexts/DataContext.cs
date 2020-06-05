@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using UserDomain.Entities;
+using UserDomain.Models;
 
 namespace UserInfra.Contexts
 {

@@ -109,14 +109,13 @@ namespace UserInfra.Migrations
                     UserZipCode = table.Column<int>(type: "int(11)", nullable: false),
                     UserId = table.Column<long>(nullable: false),
                     AddressTypeId = table.Column<long>(nullable: false),
-                    AddressTypeId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserAddress", x => x.UserAddressId);
                     table.ForeignKey(
-                        name: "FK_UserAddress_AddressType_AddressTypeId1",
-                        column: x => x.AddressTypeId1,
+                        name: "FK_UserAddress_AddressType_AddressTypeId",
+                        column: x => x.AddressTypeId,
                         principalTable: "AddressType",
                         principalColumn: "AddressTypeId",
                         onDelete: ReferentialAction.Restrict);
@@ -192,9 +191,9 @@ namespace UserInfra.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAddress_AddressTypeId1",
+                name: "IX_UserAddress_AddressTypeId",
                 table: "UserAddress",
-                column: "AddressTypeId1");
+                column: "AddressTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAddress_UserId",

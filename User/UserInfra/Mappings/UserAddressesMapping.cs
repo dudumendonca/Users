@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UserDomain.Entities;
+using UserDomain.Models;
 
 namespace UserInfra.Mappings
 {

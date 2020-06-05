@@ -129,10 +129,7 @@ namespace UserInfra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("AddressTypeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("AddressTypeId1")
+                   b.Property<int?>("AddressTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserCity")
@@ -164,7 +161,7 @@ namespace UserInfra.Migrations
 
                     b.HasKey("UserAddressId");
 
-                    b.HasIndex("AddressTypeId1");
+                    b.HasIndex("AddressTypeId");
 
                     b.HasIndex("UserId");
 
@@ -254,7 +251,7 @@ namespace UserInfra.Migrations
                 {
                     b.HasOne("UserDomain.Entities.AddressType", "AddressType")
                         .WithMany()
-                        .HasForeignKey("AddressTypeId1");
+                        .HasForeignKey("AddressTypeId");
 
                     b.HasOne("UserDomain.Entities.User", "User")
                         .WithMany("Addresses")

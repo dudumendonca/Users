@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UserDomain.Repositories;
 using UserInfra.Contexts;
+using UserInfra.Repositories;
 
 namespace UserApi
 {
@@ -23,6 +25,7 @@ namespace UserApi
 
             //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
             services.AddDbContext<DataContext>(opt => opt.UseMySql(Configuration.GetConnectionString("connectionString")));
+            services.AddScoped<IUserRepository, UserRepository>();
 
         }
 

@@ -1,4 +1,4 @@
-namespace UserDomain.Entities
+namespace UserDomain.Models
 {
     public class AddressType
     {

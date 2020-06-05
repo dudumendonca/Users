@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UserDomain.Entities;
+using UserDomain.Models;
 
 namespace UserInfra.Mappings
 {
@@ -21,7 +21,7 @@ namespace UserInfra.Mappings
             builder.Property(x => x.DepartmentId).HasColumnType("int");
             builder.Property(x => x.CargoId).HasColumnType("int");
             builder.Property(x => x.ProfileId).HasColumnType("int");
-            builder.HasOne(f => f.UserStatus).WithOne(e => e.User);
+            //builder.HasOne(f => f.UserStatus).WithOne(e => e.User);
             builder.Property(x => x.Role).HasColumnType("varchar(50)");
         }
     }
