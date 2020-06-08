@@ -1,10 +1,11 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UserDomain.Repositories;
+using UserDomain.Interfaces;
 using UserInfra.Contexts;
 using UserInfra.Repositories;
 
@@ -26,6 +27,8 @@ namespace UserApi
             //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Database"));
             services.AddDbContext<DataContext>(opt => opt.UseMySql(Configuration.GetConnectionString("connectionString")));
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
 
         }
 

@@ -3,27 +3,27 @@ using System.Collections.Generic;
 
 namespace UserDomain.Models
 {
-    public class User
+    public class User : Entity
     {
-        public User(long userId, string userName, string userGender, string userMainEmail, string userPassword, DateTime userBirthDate, string userCpf, DateTime? userFirstLoginDate, DateTime? userDeletedDate, long? userDeletedUser, int customerId, int departmentId, int cargoId, int profileId, int userStatusId, string role)
-        {
-            UserId = userId;
-            UserName = userName;
-            UserGender = userGender;
-            UserMainEmail = userMainEmail;
-            UserPassword = userPassword;
-            UserBirthDate = userBirthDate;
-            UserCpf = userCpf;
-            UserFirstLoginDate = userFirstLoginDate;
-            UserDeletedDate = null;
-            UserDeletedUser = null;
-            CustomerId = customerId;
-            DepartmentId = departmentId;
-            CargoId = cargoId;
-            ProfileId = profileId;
-            UserStatusId = userStatusId;
-            Role = role;
-        }
+        //public User(long userId, string userName, string userGender, string userMainEmail, string userPassword, DateTime userBirthDate, string userCpf, DateTime? userFirstLoginDate, DateTime? userDeletedDate, long? userDeletedUser, int customerId, int departmentId, int cargoId, int profileId, int userStatusId, string role)
+        //{
+        //    UserId = userId;
+        //    UserName = userName;
+        //    UserGender = userGender;
+        //    UserMainEmail = userMainEmail;
+        //    UserPassword = userPassword;
+        //    UserBirthDate = userBirthDate;
+        //    UserCpf = userCpf;
+        //    UserFirstLoginDate = userFirstLoginDate;
+        //    UserDeletedDate = null;
+        //    UserDeletedUser = null;
+        //    CustomerId = customerId;
+        //    DepartmentId = departmentId;
+        //    CargoId = cargoId;
+        //    ProfileId = profileId;
+        //    UserStatusId = userStatusId;
+        //    Role = role;
+        //}
 
         public long UserId { get; private set; }
         public string UserName { get; private set; }

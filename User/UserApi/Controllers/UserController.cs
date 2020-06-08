@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UserApi.ViewModels;
+using UserDomain.Interfaces;
 using UserDomain.Models;
-using UserDomain.Repositories;
 
 namespace UserApi.Controllers
 {
@@ -12,23 +14,28 @@ namespace UserApi.Controllers
     {
 
         private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IUserService userService, IMapper mapper)
         {
             _userRepository = userRepository;
+            _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
+        public async Task<IEnumerable<UserViewModel>> Get()
         {
-            var users = await _userRepository.GetAll();
+            return _mapper.Map<IEnumerable<UserViewModel>>(await _userRepository.ObterTodos());
+            //var users =  await _userRepository.GetAll();
 
-            return Ok(users);
+            //return Ok(users);
         }
 
         [HttpGet]
-        [Route("{email}")]
+        [Route("{id:int&email:string}")]
         public async Task<ActionResult<User>> GetByEmail(int id, string email)
         {
             var user = await _userRepository.GetById(id, email);
