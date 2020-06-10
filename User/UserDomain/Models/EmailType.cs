@@ -1,14 +1,8 @@
 namespace UserDomain.Models
 {
-    public class EmailType
+    public class EmailType : Entity
     {
-        public EmailType(int emailTypeId, string emailTypeName)
-        {
-            EmailTypeId = emailTypeId;
-            EmailTypeName = emailTypeName;
-        }
-
-        public int EmailTypeId { get; private set; }
-        public string EmailTypeName { get; private set; }
+        public int EmailTypeId { get; set; }
+        public string EmailTypeName { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace UserDomain.Models
 {
@@ -6,10 +7,10 @@ namespace UserDomain.Models
     {
         protected Entity()
         {
-            Id = 0;
+           
         }
 
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }
 

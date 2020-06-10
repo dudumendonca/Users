@@ -35,7 +35,7 @@ namespace UserApi.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int&email:string}")]
+        [Route("{id:int}/{email}")]
         public async Task<ActionResult<User>> GetByEmail(int id, string email)
         {
             var user = await _userRepository.GetById(id, email);
@@ -44,13 +44,14 @@ namespace UserApi.Controllers
 
         [HttpPost]
         [Route("")]
-        public ActionResult<User> Post([FromBody] User model)
+        public async Task<ActionResult<UserViewModel>> Adicionar(UserViewModel userViewModel)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
-                _userRepository.Create(model);
+                await _userService.Adicionar(_mapper.Map<User>(userViewModel));
+                //_userRepository.Create(model);
 
                 return Ok();
             }
@@ -62,18 +63,20 @@ namespace UserApi.Controllers
 
         [HttpPut]
         [Route("{userId:int}")]
-        public async Task<ActionResult<User>> Put(int userId, [FromBody] User model)
+        public async Task<IActionResult> Atualizar(int userId, UserViewModel userViewModel)
         {
+            if (userId != userViewModel.UserId)
+                return NotFound(new { message = "Usuário não encontrado" });
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (userId != model.UserId)
-                return NotFound(new { message = "Usuário não encontrado" });
+            //var userUpd = await ObterUsuario(userId);
 
             try
             {
 
-                 _userRepository.Update(model);
+                await _userService.Atualizar(_mapper.Map<User>(userViewModel));//.Update(model);
                 return Ok(new { message = "Usuário atualizado com sucesso" });
             }
             catch (Exception)
@@ -93,13 +96,20 @@ namespace UserApi.Controllers
 
             try
             {
-                _userRepository.Delete();
+                await _userService.Remover(userId);
+
+                //_userRepository.Delete();
                 return Ok(new { message = "Usuário removido com sucesso" });
             }
             catch (Exception)
             {
                 return BadRequest(new { message = "Não foi possivel remover o usuário" });
             }
+        }
+
+        private async Task<UserViewModel> ObterUsuario(int id)
+        {
+            return _mapper.Map<UserViewModel>(await _userRepository.ObterPorId(id));
         }
     }
 }

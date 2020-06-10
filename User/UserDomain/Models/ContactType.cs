@@ -1,14 +1,8 @@
 namespace UserDomain.Models
 {
-    public class ContactType
+    public class ContactType : Entity
     {
-        public ContactType(int contactTypeId, string contactTypeName)
-        {
-            ContactTypeId = contactTypeId;
-            ContactTypeName = contactTypeName;
-        }
-
-        public int ContactTypeId { get; private set; }
-        public string  ContactTypeName { get; private set; }
+        public int ContactTypeId { get; set; }
+        public string ContactTypeName { get; set; }
     }
 }

@@ -17,10 +17,9 @@ namespace UserInfra.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("UserDomain.Entities.AddressType", b =>
+            modelBuilder.Entity("UserDomain.Models.AddressType", b =>
                 {
                     b.Property<int>("AddressTypeId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("AddressTypeName")
@@ -31,10 +30,9 @@ namespace UserInfra.Migrations
                     b.ToTable("AddressType");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.ContactType", b =>
+            modelBuilder.Entity("UserDomain.Models.ContactType", b =>
                 {
                     b.Property<int>("ContactTypeId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("ContactTypeName")
@@ -45,10 +43,9 @@ namespace UserInfra.Migrations
                     b.ToTable("ContactType");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.EmailType", b =>
+            modelBuilder.Entity("UserDomain.Models.EmailType", b =>
                 {
                     b.Property<int>("EmailTypeId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("EmailTypeName")
@@ -59,7 +56,7 @@ namespace UserInfra.Migrations
                     b.ToTable("EmailType");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.User", b =>
+            modelBuilder.Entity("UserDomain.Models.User", b =>
                 {
                     b.Property<long>("UserId")
                         .ValueGeneratedOnAdd()
@@ -72,6 +69,9 @@ namespace UserInfra.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("ProfileId")
@@ -117,19 +117,19 @@ namespace UserInfra.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("UserStatusId")
-                        .IsUnique();
-
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserAddress", b =>
+            modelBuilder.Entity("UserDomain.Models.UserAddress", b =>
                 {
                     b.Property<long>("UserAddressId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                   b.Property<int?>("AddressTypeId")
+                    b.Property<int>("AddressTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("UserCity")
@@ -168,14 +168,13 @@ namespace UserInfra.Migrations
                     b.ToTable("UserAddress");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserContact", b =>
+            modelBuilder.Entity("UserDomain.Models.UserContact", b =>
                 {
-                    b.Property<long>("UserContactId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
                     b.Property<int>("ContactTypeId")
                         .HasColumnType("int");
+
+                    b.Property<long>("UserContactId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("UserCountryRegion")
                         .HasColumnType("int");
@@ -189,7 +188,7 @@ namespace UserInfra.Migrations
                     b.Property<int>("UserPhoneNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("UserContactId");
+                    b.HasKey("ContactTypeId");
 
                     b.HasIndex("ContactTypeId");
 
@@ -198,19 +197,19 @@ namespace UserInfra.Migrations
                     b.ToTable("UserContact");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserEmail", b =>
+            modelBuilder.Entity("UserDomain.Models.UserEmail", b =>
                 {
-                    b.Property<int>("UserEmailId")
+                    b.Property<long>("UserEmailId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.Property<int>("EmailTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UserId1")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserMail")
@@ -220,15 +219,14 @@ namespace UserInfra.Migrations
 
                     b.HasIndex("EmailTypeId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserEmail");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserStatus", b =>
+            modelBuilder.Entity("UserDomain.Models.UserStatus", b =>
                 {
                     b.Property<int>("UserStatusId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("UserStatusName")
@@ -239,49 +237,51 @@ namespace UserInfra.Migrations
                     b.ToTable("UserStatus");
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.User", b =>
+            modelBuilder.Entity("UserDomain.Models.User", b =>
                 {
-                    b.HasOne("UserDomain.Entities.UserStatus", "UserStatus")
+                    b.HasOne("UserDomain.Models.UserStatus", null)
                         .WithOne("User")
-                        .HasForeignKey("UserDomain.Entities.User", "UserStatusId")
+                        .HasForeignKey("UserDomain.Models.User", "UserStatusId")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserAddress", b =>
+            modelBuilder.Entity("UserDomain.Models.UserAddress", b =>
                 {
-                    b.HasOne("UserDomain.Entities.AddressType", "AddressType")
+                    b.HasOne("UserDomain.Models.AddressType", "AddressType")
                         .WithMany()
-                        .HasForeignKey("AddressTypeId");
+                        .HasForeignKey("AddressTypeId")
+                        .IsRequired();
 
-                    b.HasOne("UserDomain.Entities.User", "User")
+                    b.HasOne("UserDomain.Models.User", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserContact", b =>
+            modelBuilder.Entity("UserDomain.Models.UserContact", b =>
                 {
-                    b.HasOne("UserDomain.Entities.ContactType", "ContactType")
+                    b.HasOne("UserDomain.Models.ContactType", "ContactType")
                         .WithMany()
                         .HasForeignKey("ContactTypeId")
                         .IsRequired();
 
-                    b.HasOne("UserDomain.Entities.User", "User")
+                    b.HasOne("UserDomain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserDomain.Entities.UserEmail", b =>
+            modelBuilder.Entity("UserDomain.Models.UserEmail", b =>
                 {
-                    b.HasOne("UserDomain.Entities.EmailType", "EmailType")
+                    b.HasOne("UserDomain.Models.EmailType", "EmailType")
                         .WithMany()
                         .HasForeignKey("EmailTypeId")
                         .IsRequired();
 
-                    b.HasOne("UserDomain.Entities.User", "User")
+                    b.HasOne("UserDomain.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -108,7 +108,7 @@ namespace UserInfra.Migrations
                     UserCountry = table.Column<string>(type: "varchar(50)", nullable: true),
                     UserZipCode = table.Column<int>(type: "int(11)", nullable: false),
                     UserId = table.Column<long>(nullable: false),
-                    AddressTypeId = table.Column<long>(nullable: false),
+                    AddressTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,7 +131,7 @@ namespace UserInfra.Migrations
                 name: "UserContact",
                 columns: table => new
                 {
-                    UserContactId = table.Column<long>(nullable: false)
+                    UserContactId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserCountryRegion = table.Column<int>(nullable: false),
                     UserDDD = table.Column<int>(nullable: false),
@@ -160,11 +160,10 @@ namespace UserInfra.Migrations
                 name: "UserEmail",
                 columns: table => new
                 {
-                    UserEmailId = table.Column<int>(nullable: false)
+                    UserEmailId = table.Column<long>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserMail = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<long>(nullable: true),
+                    UserId = table.Column<long>(nullable: false),
                     EmailTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -177,8 +176,8 @@ namespace UserInfra.Migrations
                         principalColumn: "EmailTypeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UserEmail_User_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_UserEmail_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
@@ -187,8 +186,7 @@ namespace UserInfra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_User_UserStatusId",
                 table: "User",
-                column: "UserStatusId",
-                unique: true);
+                column: "UserStatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAddress_AddressTypeId",
@@ -216,9 +214,9 @@ namespace UserInfra.Migrations
                 column: "EmailTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEmail_UserId1",
+                name: "IX_UserEmail_UserId",
                 table: "UserEmail",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
